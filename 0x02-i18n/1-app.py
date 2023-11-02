@@ -4,17 +4,19 @@
 from flask import Flask, render_template
 from flask_babel import Babel
 
-app = Flask(__name__)
-babel = Babel(app, default_locale="en", default_timezone="UTC")
-
 
 class Config:
     """class configures available
     languages
     """
     LANGUAGES = ["en", "fr"]
-    babel_default_locale = "en"
-    babel_default_timezone = "UTC"
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
+
+
+app = Flask(__name__)
+app.config.from_object(Config)
+babel = Babel(app)
 
 
 @app.route('/')
@@ -23,8 +25,5 @@ def home():
     """
     return render_template('0-index.html')
 
-
-app.config.from_object(Config)
-
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
