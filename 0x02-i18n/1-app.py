@@ -23,6 +23,8 @@ def home():
     """
     return render_template('0-index.html')
 
+
+app.config.from_object(Config)
+
 if __name__ == '__main__':
-    app.config.from_object(Config)
     app.run()
