@@ -27,6 +27,14 @@ users = {
 }
 
 
+@app.before_request
+def before_request():
+    """executed before anything
+    """
+    user = get_user()
+    g.user = user
+
+
 @babel.localeselector
 def get_locale() -> str:
     """Determines locale from our
@@ -58,14 +66,6 @@ def get_user():
         user_id = int(user_id)
         return users.get(user_id)
     return None
-
-
-@app.before_request
-def before_request():
-    """executed before anything
-    """
-    user = get_user()
-    g.user = user
 
 
 def get_user_locale():
